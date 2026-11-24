@@ -8,6 +8,7 @@ ipTIME WOL GUI Controller
 """
 
 import os
+import sys
 import json
 import threading
 import tkinter as tk
@@ -18,7 +19,12 @@ from typing import Dict
 from iptime_wol import IpTimeWOL, _normalize_mac, _is_valid_unicast_mac
 from lan_scanner import scan_lan_arp
 
-CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
+if getattr(sys, "frozen", False):
+    APP_DIR = os.path.dirname(sys.executable)
+else:
+    APP_DIR = os.path.dirname(os.path.abspath(__file__))
+
+CONFIG_FILE = os.path.join(APP_DIR, "config.json")
 
 
 class WolGuiApp:

@@ -10,7 +10,8 @@ import json
 from iptime_wol import IpTimeWOL
 
 def main():
-    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
+    app_dir = os.path.dirname(sys.executable) if getattr(sys, "frozen", False) else os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(app_dir, "config.json")
     if not os.path.exists(config_path):
         print(f"[오류] {config_path} 파일이 없습니다. 먼저 gui.py 또는 iptime_wol.py를 실행하여 설정을 저장하세요.")
         sys.exit(1)
